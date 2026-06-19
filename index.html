@@ -50,6 +50,10 @@ body{overflow:hidden;background:#040810;font-family:'Inter',system-ui,sans-serif
 #prelude-video{width:100%;height:100%;object-fit:contain;background:#020610}
 #prelude-counter{position:absolute;right:34px;bottom:28px;font-family:'Orbitron',monospace;font-size:12px;letter-spacing:2px;color:rgba(210,240,255,.72);text-shadow:0 0 18px rgba(60,200,255,.45)}
 #prelude-hint{position:absolute;left:34px;bottom:28px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(210,240,255,.5);text-shadow:0 0 18px rgba(60,200,255,.35)}
+#prelude-nav{position:absolute;left:50%;bottom:20px;display:flex;gap:7px;transform:translateX(-50%);padding:5px;border:1px solid rgba(84,232,255,.3);border-radius:999px;background:rgba(2,10,18,.78);box-shadow:0 0 18px rgba(84,232,255,.18);backdrop-filter:blur(8px)}
+#prelude-nav button{width:38px;height:31px;border:1px solid rgba(84,232,255,.25);border-radius:999px;background:rgba(10,31,43,.78);color:#dffcff;font-size:19px;font-weight:700;line-height:1;cursor:pointer;transition:.18s ease}
+#prelude-nav button:hover{background:rgba(17,66,82,.94);box-shadow:0 0 14px rgba(84,232,255,.32);transform:translateY(-1px)}
+#prelude-nav button:disabled{opacity:.25;cursor:default;box-shadow:none;transform:none}
 #drag-info{position:fixed;top:70px;right:20px;z-index:20;background:rgba(10,5,30,.92);border:1px solid rgba(200,100,255,.4);border-radius:12px;padding:14px 20px;font-family:'Orbitron',monospace;font-size:12px;color:#ddd;display:none;min-width:280px;backdrop-filter:blur(10px);box-shadow:0 0 30px rgba(140,0,200,.2)}
 #drag-info.visible{display:block}
 #drag-info h3{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,100,255,.8);margin-bottom:8px}
@@ -387,6 +391,10 @@ body{overflow:hidden;background:#040810;font-family:'Inter',system-ui,sans-serif
 <div id="video-prelude">
   <video id="prelude-video" src="slide_1.mp4" autoplay muted playsinline></video>
   <div id="prelude-hint">Flechas para avanzar</div>
+  <div id="prelude-nav" aria-label="Navegación de introducción">
+    <button id="prelude-prev" type="button" title="Anterior" aria-label="Anterior">‹</button>
+    <button id="prelude-next" type="button" title="Siguiente" aria-label="Siguiente">›</button>
+  </div>
   <div id="prelude-counter">01 / 03</div>
 </div>
 <div id="rq-overlay">
@@ -742,7 +750,8 @@ const RQ_SECTION_DATA={
   s6_3:{kicker:'Gema 06',title:'Relatos políticos directivos',body:'Relatos políticos directivos.'},
   s7_1:{kicker:'Gema 07',title:'Afectividades',body:'Afectividades.'},
   s7_2:{kicker:'Gema 07',title:'Espacialidades',body:'Espacialidades.'},
-  s7_3:{kicker:'Gema 07',title:'Materialidades',body:'Materialidades.'}
+  s7_3:{kicker:'Gema 07',title:'Materialidades',body:'Materialidades.'},
+  s8_1:{kicker:'Gema 08',title:'Conclusiones y prospectivas',body:'Conclusiones y prospectivas.'}
 };
 const RQ_SECTION_BG={
   main:2,subs:3,hyp:4,
@@ -750,12 +759,12 @@ const RQ_SECTION_BG={
   s4_1:4,s4_2:5,s4_3:6,s4_4:1,
   s5_1:2,s5_2:3,s5_3:4,
   s6_1:5,s6_2:6,s6_3:1,
-  s7_1:2,s7_2:3,s7_3:4
+  s7_1:2,s7_2:3,s7_3:4,
+  s8_1:5
 };
 let rqPieceMarkers=[];
 const STAGE_PIECES={
   0:[
-    {label:'La fisura',kind:'fissure'},
     {label:'PREGUNTAS E HIPÓTESIS de investigación',kind:'rq_all'}
   ],
   2:[
@@ -783,6 +792,9 @@ const STAGE_PIECES={
     {label:'Afectividades',kind:'s7_1'},
     {label:'Espacialidades',kind:'s7_2'},
     {label:'Materialidades',kind:'s7_3'}
+  ],
+  7:[
+    {label:'Conclusiones y prospectivas',kind:'s8_1'}
   ]
 };
 const deployedPieceStages=new Set();
@@ -3004,6 +3016,34 @@ function sendGema07Key(key){
   try{frame?.contentWindow?.document?.dispatchEvent(new KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));}catch(err){}
 }
 
+function openConclusiones(){
+  if(rqAnimTimer){clearTimeout(rqAnimTimer);rqAnimTimer=null}
+  rqActiveKind='s8_1';
+  document.getElementById('rq-screen').classList.remove('tecno-fullscreen');
+  document.getElementById('rq-screen').classList.add('narrative-fullscreen');
+  document.getElementById('rq-screen').style.setProperty('--embed-bg',"url('bg_embed_5.png')");
+  playWarp();
+  setRQStandardVisible(false);
+  clearRQStandard();
+  showRQOverlay();
+  const special=document.getElementById('rq-special');
+  special.innerHTML=`
+    <style>
+      .conclusiones-embed-stage{position:absolute;inset:0;overflow:hidden;background:#030713}
+      .conclusiones-embed{position:absolute;inset:0;width:100%;height:100%;border:0;background:#030713;animation:conclusionesIn .72s cubic-bezier(.17,.82,.22,1) both}
+      @keyframes conclusionesIn{from{opacity:0;filter:blur(10px);transform:scale(.94)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+    </style>
+    <section class="conclusiones-embed-stage">
+      <iframe class="conclusiones-embed" src="assets_conclusiones/conclusiones.html" title="Conclusiones y prospectivas"></iframe>
+    </section>`;
+  special.classList.add('visible');
+}
+
+function sendConclusionesKey(key){
+  const frame=document.querySelector('.conclusiones-embed');
+  try{frame?.contentWindow?.document?.dispatchEvent(new KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));}catch(err){}
+}
+
 function advanceGema05Narrativas(dir=1,fromChild=false){
   if(gema05NarrativeStep>=3&&!fromChild){
     const frame=document.querySelector('.narrative-embed');
@@ -3049,6 +3089,7 @@ function openRQSection(kind){
   if(kind==='s6_2'){openGema06Recambio();return;}
   if(kind==='s6_3'){openGema06RelatosPoliticos();return;}
   if(kind==='s7_1'||kind==='s7_2'||kind==='s7_3'){openGema07Embed(kind);return;}
+  if(kind==='s8_1'){openConclusiones();return;}
   const bgNum=RQ_SECTION_BG[kind]||6;
   document.getElementById('rq-screen').style.setProperty('--embed-bg',"url('bg_embed_"+bgNum+".png')");
   playWarp();
@@ -4405,6 +4446,8 @@ function updateBtns(){
   if(preludeActive){
     document.getElementById('btn-prev').disabled=preludeIdx===0;
     document.getElementById('btn-next').disabled=!mapReady&&preludeIdx===PRELUDE_SLIDES.length-1;
+    document.getElementById('prelude-prev').disabled=preludeIdx===0;
+    document.getElementById('prelude-next').disabled=!mapReady&&preludeIdx===PRELUDE_SLIDES.length-1;
     return;
   }
   document.getElementById('btn-prev').disabled=curStage===0||isAnimating;
@@ -4412,6 +4455,8 @@ function updateBtns(){
 }
 document.getElementById('btn-prev').onclick=()=>preludeActive?prevPrelude():goTo(curStage-1);
 document.getElementById('btn-next').onclick=()=>preludeActive?nextPrelude():goTo(curStage+1);
+document.getElementById('prelude-prev').onclick=prevPrelude;
+document.getElementById('prelude-next').onclick=nextPrelude;
 document.getElementById('btn-play').onclick=function(){
   autoPlay=!autoPlay;this.innerHTML=autoPlay?'&#9646;&#9646; Pausa':'&#9654; Auto';
   if(autoPlay&&!isAnimating&&curStage<STAGES.length-1)autoPauseTimer=setTimeout(()=>goTo(curStage+1),PAUSE_DUR);
@@ -4524,6 +4569,10 @@ document.addEventListener('keydown',e=>{
   if(rqOpen&&(rqActiveKind==='s7_1'||rqActiveKind==='s7_2'||rqActiveKind==='s7_3')){
     if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();sendGema07Key('ArrowRight');return;}
     if(e.key==='ArrowLeft'){e.preventDefault();sendGema07Key('ArrowLeft');return;}
+  }
+  if(rqOpen&&rqActiveKind==='s8_1'){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();sendConclusionesKey('ArrowRight');return;}
+    if(e.key==='ArrowLeft'){e.preventDefault();sendConclusionesKey('ArrowLeft');return;}
   }
   if(rqOpen&&rqActiveKind==='s4_4'){
     if(e.key==='m'||e.key==='M'){e.preventDefault();toggleTecnoImageEdit();return;}
