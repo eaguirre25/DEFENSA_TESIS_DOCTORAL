@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Superdirección Escolar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030810;--text:#eaf1ff;--muted:rgba(170,190,230,.55);--line:rgba(255,255,255,.08);--violet:#7F77DD;--green:#1D9E75;--orange:#D85A30;--gold:#BA7517;--pink:#D4537E;--yellow:#FFD700}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#030810;color:var(--text);font-family:'Rajdhani',system-ui,-apple-system,Segoe UI,sans-serif}body{background:radial-gradient(circle at 20% 20%,rgba(127,119,221,.16),transparent 32%),radial-gradient(circle at 80% 72%,rgba(29,158,117,.12),transparent 30%),radial-gradient(circle at 48% 88%,rgba(212,83,126,.10),transparent 24%),#030810}body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(circle at center,rgba(0,0,0,.75),transparent 82%);pointer-events:none}.app{height:100%;display:grid;grid-template-rows:72px 1fr 64px;position:relative}.top,.foot{display:flex;align-items:center;justify-content:space-between;padding:0 34px;border-color:var(--line);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.008));backdrop-filter:blur(10px)}.top{border-bottom:1px solid var(--line)}.foot{border-top:1px solid var(--line);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(225,235,255,.46)}.titlebar{font-size:18px;letter-spacing:.14em;text-transform:uppercase;color:rgba(225,235,255,.78);font-weight:700}.progress{display:flex;gap:8px;width:min(430px,38vw)}.seg{height:8px;flex:1;border-radius:999px;background:var(--c);color:var(--c);opacity:.18;transition:.35s}.seg.lit{opacity:1;transform:translateY(-1px);box-shadow:0 0 18px currentColor}.main{min-height:0;display:grid;grid-template-columns:minmax(360px,40vw) 1fr;gap:22px;padding:22px 30px 16px}.stage,.side{min-height:0;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 24px 80px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.06)}.stage{display:grid;place-items:center;position:relative;overflow:hidden}.stage:after{display:none;content:""}.svgbox{width:min(73vh,92%);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 22px 54px rgba(0,0,0,.45))}.svgbox svg{width:100%;height:100%;overflow:visible}.rings{transform-origin:0 0}.shadow{opacity:.18}.arc{cursor:pointer;transition:opacity .25s,filter .25s}.arc.dim{opacity:.20}.arc.seen{opacity:.48}.arc.active{opacity:1;filter:drop-shadow(0 0 8px var(--c)) drop-shadow(0 0 22px var(--c))}.roman{font-weight:800;pointer-events:none;transition:opacity .25s,font-size .25s;font-family:'Rajdhani',system-ui,sans-serif}.center-ring{transform-origin:0 0;animation:pulse 3s ease-in-out infinite}.center-text-main{font-size:30px;font-weight:700;letter-spacing:2px;font-family:'Rajdhani',system-ui,sans-serif}.center-text-sub{font-size:24px;font-weight:600;letter-spacing:1.5px;font-family:'Rajdhani',system-ui,sans-serif}.center-cite{font-size:12px;font-weight:600;letter-spacing:2px;font-family:'Rajdhani',system-ui,sans-serif}.hud{position:absolute;right:22px;top:22px;display:flex;flex-direction:column;gap:8px}.hud button{width:54px;height:40px;border:2px solid var(--c);border-radius:8px;background:transparent;color:var(--c);font-weight:800;cursor:pointer;opacity:.36;transition:.25s;font-family:'Rajdhani',system-ui,sans-serif;font-size:16px}.hud button:hover,.hud button.active{opacity:1;background:var(--c);color:#02040a;box-shadow:0 0 22px var(--c);transform:translateX(-2px)}.side{padding:22px;overflow:hidden}.panel{height:100%;overflow:hidden;padding-right:0;transition:opacity .42s ease,transform .42s ease}.panel::-webkit-scrollbar{width:8px}.panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:999px}.hint{height:100%;display:grid;place-items:center;text-align:center;font-size:18px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Rajdhani',system-ui,sans-serif;font-weight:600}.hint b{display:block;margin-top:16px;color:var(--yellow);font-size:22px;text-shadow:0 0 10px var(--yellow),0 0 28px #ff8c00}.dim-title{border-left:5px solid var(--c);padding-left:16px;margin-bottom:10px}.dim-title h1{margin:0 0 7px;font-size:clamp(25px,2.7vw,38px);line-height:1.02;color:var(--c);text-shadow:0 0 16px rgba(255,255,255,.12);font-family:'Rajdhani',system-ui,sans-serif;font-weight:700}.dim-title p{margin:0;font-size:14px;color:rgba(255,255,255,.38);letter-spacing:.12em;text-transform:uppercase;font-family:'Rajdhani',system-ui,sans-serif;font-weight:600}.sub{background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 10px;margin-bottom:7px}.sub h2{font-size:21px;line-height:1.03;margin:0 0 3px;font-family:'Rajdhani',system-ui,sans-serif;font-weight:700}.count{font-size:12px;color:rgba(255,255,255,.31);margin-bottom:4px;font-family:'Rajdhani',system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;font-weight:600}.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 8px}.role{font-size:22px;line-height:1.02;padding:4px 8px;margin:0;border-left:2px solid var(--c);border-radius:0 7px 7px 0;background:rgba(255,255,255,.042);color:rgba(255,255,255,.90);font-family:'Rajdhani',system-ui,sans-serif;font-weight:600;letter-spacing:.01em}.legend{font-size:18px;font-weight:700;letter-spacing:.18em;color:var(--yellow);opacity:0;transition:opacity 1s;text-shadow:0 0 8px var(--yellow),0 0 22px #ffa500,0 0 46px #ff8c00;font-family:'Rajdhani',system-ui,sans-serif}.legend.show{opacity:1;animation:gold 2s ease-in-out infinite}
+.final-total{
+  margin-top:14px;
+  padding:14px 18px;
+  border:1px solid rgba(255,215,0,.52);
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,215,0,.16),rgba(255,140,0,.06));
+  color:var(--yellow);
+  font-family:'Rajdhani',system-ui,sans-serif;
+  font-size:clamp(24px,2.4vw,36px);
+  font-weight:700;
+  letter-spacing:.12em;
+  text-align:center;
+  text-transform:uppercase;
+  text-shadow:0 0 10px var(--yellow),0 0 30px #ff8c00;
+  box-shadow:0 0 28px rgba(255,215,0,.10),inset 0 0 18px rgba(255,215,0,.07);
+}
+body.big-screen .final-total{
+  margin-top:10px;
+  padding:10px 14px;
+  font-size:clamp(28px,2.8vw,42px);
+}
+
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.24}50%{transform:scale(1.24);opacity:.08}}@keyframes gold{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
+body.projection .app{display:block;height:100vh}
+body.projection .top,body.projection .foot{display:none}
+body.projection .main{height:100vh;display:grid;grid-template-columns:28% 72%;gap:14px;padding:10px 14px}
+body.projection .stage,body.projection .side{border-radius:18px}
+body.projection .svgbox{width:min(48vh,94%)}
+body.projection .side{padding:16px 18px}
+body.projection .panel{height:100%;overflow:hidden}
+body.projection .dim-title{margin-bottom:8px}
+body.projection .dim-title h1{font-size:clamp(32px,3vw,48px)}
+body.projection .dim-title p{font-size:16px}
+body.projection .sub{padding:8px 10px;margin-bottom:6px}
+body.projection .sub h2{font-size:26px}
+body.projection .count{font-size:14px;margin-bottom:3px}
+body.projection .role{font-size:27px;line-height:1.0;padding:3px 8px}
+body.projection .stage:before{content:'F · SALIR DE PANTALLA GIGANTE';position:absolute;right:24px;bottom:22px;font-size:12px;letter-spacing:.16em;color:rgba(255,255,255,.30);font-weight:700}
+
+@media(max-width:980px){html,body{overflow:auto}.app{height:auto;min-height:100vh}.top,.foot{align-items:flex-start;flex-direction:column;gap:14px;padding:18px 22px}.progress{width:100%}.main{grid-template-columns:1fr;padding:18px}.stage{min-height:470px}.svgbox{width:min(88vw,520px)}.side{min-height:520px}.hud{position:static;flex-direction:row;margin-top:14px}.role{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="titlebar">Superdirección Escolar · Relevamiento normativo</div><div class="progress" id="progress"></div></header>
+<main class="main">
+<section class="stage"><div class="svgbox"><svg viewBox="-280 -280 560 560" aria-label="Constelación plurinormativa interactiva"><g id="shadow" class="shadow"></g><g id="rings" class="rings"></g><g id="labels"></g><circle class="center-ring" r="128" fill="none" stroke="rgba(120,140,255,.45)" stroke-width="1.5"></circle><circle r="108" fill="#08091f" stroke="rgba(120,140,255,.52)" stroke-width="1.5"></circle><text y="-20" text-anchor="middle" fill="rgba(225,235,255,.94)" class="center-text-main">SUPER</text><text y="12" text-anchor="middle" fill="rgba(225,235,255,.90)" class="center-text-sub">DIRECCIÓN</text><text y="40" text-anchor="middle" fill="rgba(255,215,0,.92)" class="center-cite">LIMA (2011)</text></svg></div><nav class="hud" id="hud"></nav></section>
+<section class="side"><div id="panel" class="panel"><div class="hint">Presioná 1–5 o tocá un anillo para desplegar la dimensión.<b>66 funciones asignadas</b></div></div></section>
+</main>
+<footer class="foot"><span></span><span id="legend" class="legend">66 funciones</span></footer>
+</div>
+<script>
+const D=[
+{name:'I. Pedagógicos y curriculares',roman:'I',color:'#7F77DD',subs:[['Liderazgo pedagógico',['Conductor/a del Proyecto Institucional (PI)','Responsable de la calidad educativa','Promotor/a de la innovación pedagógica','Articulador/a curricular']],['Organización y planificación escolar',['Planificador/a del ciclo lectivo','Coordinador/a de evaluaciones','Gestor/a de trayectorias educativas','Organizador/a de espacios y tiempos escolares']],['Implementación de programas específicos',['Coordinador/a de Aulas de Fortalecimiento (AFTE)','Facilitador/a de Educación Profesional Secundaria','Promotor/a de Prácticas Formativas','Supervisor/a de Centros de Estudiantes','Coordinador/a de Programas de Inclusión','Gestor/a de educación en contextos especiales','Facilitador/a de Consejo Consultivo Estudiantil']]]},
+{name:'II. Gestión institucional',roman:'II',color:'#1D9E75',subs:[['Administración y organización escolar',['Administrador/a de recursos humanos','Gestor/a de Plantas Orgánico Funcionales (POF)','Conductor/a de equipos directivos','Administrador/a de recursos materiales','Administrador/a de fondos de programas y proyectos','Encargado/a de patrimonio escolar']],['Relaciones intersectoriales e interinstitucionales',['Articulador/a comunitario','Coordinador/a de servicios de apoyo','Asesor/a de Cooperación Escolar','Facilitador/a de actividades comunitarias','Promotor/a de experiencias extraescolares','Representante institucional']],['Comunicación y documentación',['Comunicador/a institucional','Registrador/a oficial','Informante al sistema educativo','Interlocutor/a con familias']]]},
+{name:'III. Convivencia y bienestar',roman:'III',color:'#D85A30',subs:[['Gestión de la convivencia escolar',['Promotor/a de convivencia democrática','Coordinador/a del Consejo Institucional de Convivencia','Mediador/a de conflictos','Garante de derechos estudiantiles','Facilitador/a de participación estudiantil','Responsable de sanciones educativas']],['Inclusión y no discriminación',['Promotor/a de inclusión','Facilitador/a de Educación Sexual Integral (ESI)','Garante de diversidad','Protector/a de derechos de maternidad/paternidad']],['Atención a situaciones especiales',['Encargado/a de Ámbitos Especiales','Responsable de inclusión de estudiantes con discapacidad','Gestor/a de programas socioeducativos','Responsable de Intervención ante Vulneración de Derechos','Vinculador/a con el Sistema de Protección','Responsable de Acompañamiento a la maternidad/paternidad adolescente']]]},
+{name:'IV. Supervisión y control',roman:'IV',color:'#BA7517',subs:[['Cumplimiento normativo',['Veedor/a del cumplimiento normativo','Supervisor/a de procedimientos','Responsable de seguridad e higiene','Verificador/a de asistencia','Articulador/a de protocolos de emergencia','Aplicador/a del Régimen Disciplinario','Certificador/a de Documentación y Políticas Sociales']],['Evaluación y seguimiento',['Evaluador/a Institucional','Supervisor/a de desempeño académico','Gestor/a de evaluaciones externas','Productor/a de información estadística escolar']]]},
+{name:'V. Desarrollo profesional',roman:'V',color:'#D4537E',subs:[['Formación y capacitación',['Promotor/a de desarrollo profesional','Organizador/a de Jornadas Institucionales y reuniones de personal','Mentor/a de equipos docentes']],['Innovación y tecnología',['Promotor/a de innovación tecnológica','Gestor/a de ambientes virtuales','Responsable de alfabetización digital']],['Sustentabilidad y medio ambiente',['Promotor/a de Educación Ambiental','Gestor/a de prácticas sustentables']]]}
+];
+const total=66,NS='http://www.w3.org/2000/svg',rings=document.getElementById('rings'),shadow=document.getElementById('shadow'),labels=document.getElementById('labels'),panel=document.getElementById('panel'),hud=document.getElementById('hud'),progress=document.getElementById('progress');let spin=0,target=0,focus=0,active=-1,seen=new Set();
+function n(d){return d.subs.reduce((s,x)=>s+x[1].length,0)}function polar(r,a){a=(a-90)*Math.PI/180;return [r*Math.cos(a),r*Math.sin(a)]}function path(r0,r1,a0,a1){const p0=polar(r1,a0),p1=polar(r1,a1),p2=polar(r0,a1),p3=polar(r0,a0),l=a1-a0>180?1:0;return`M${p0[0]},${p0[1]}A${r1},${r1} 0 ${l} 1 ${p1[0]},${p1[1]}L${p2[0]},${p2[1]}A${r0},${r0} 0 ${l} 0 ${p3[0]},${p3[1]}Z`}function el(t,o){const e=document.createElementNS(NS,t);for(const k in o)e.setAttribute(k,o[k]);return e}
+let a=-92;D.forEach((d,i)=>{const ang=n(d)/total*360,a0=a+4,a1=a+ang-4,mid=(a0+a1)/2;shadow.appendChild(el('path',{d:path(150,210,a0,a1),fill:'#000',transform:'translate(8 10)',opacity:.35}));const p=el('path',{d:path(150,210,a0,a1),fill:d.color,class:'arc dim',style:`--c:${d.color}`});p.addEventListener('click',()=>select(i));rings.appendChild(p);const q=el('path',{d:path(225,262,a0,a1),fill:d.color,class:'arc dim',style:`--c:${d.color}`,opacity:.32});q.addEventListener('click',()=>select(i));rings.appendChild(q);const [x,y]=polar(180,mid),txt=el('text',{x,y,'text-anchor':'middle','dominant-baseline':'middle',fill:'rgba(255,255,255,.92)',class:'roman','font-size':18});txt.textContent=d.roman;rings.appendChild(txt);const b=document.createElement('button');b.textContent=d.roman;b.style.setProperty('--c',d.color);b.addEventListener('click',()=>select(i));hud.appendChild(b);const s=document.createElement('div');s.className='seg';s.style.setProperty('--c',d.color);progress.appendChild(s);d.a0=a0;d.a1=a1;d.mid=mid;a+=ang});
+function select(i){active=i;seen.add(i);const d=D[i],count=n(d);target=90-d.mid;document.querySelectorAll('.arc').forEach((e,j)=>{const idx=Math.floor(j/2);e.classList.toggle('active',idx===i);e.classList.toggle('seen',seen.has(idx)&&idx!==i);e.classList.toggle('dim',idx!==i&&!seen.has(idx))});[...hud.children].forEach((b,j)=>b.classList.toggle('active',j===i));[...progress.children].forEach((s,j)=>s.classList.toggle('lit',seen.has(j)));if(seen.size===D.length)document.getElementById('legend').classList.add('show');panel.style.opacity=0;panel.style.transform='translateX(30px)';setTimeout(()=>{panel.innerHTML=`<div class="dim-title" style="--c:${d.color}"><h1>${d.name}</h1><p>${count} funciones · ${d.subs.length} subdimensiones</p></div>`+d.subs.map(s=>`<article class="sub"><h2>${s[0]}</h2><div class="count">${s[1].length} funciones</div><div class="roles">${s[1].map(r=>`<div class="role" style="--c:${d.color}">${r}</div>`).join('')}</div></article>`).join('');if(i===D.length-1){panel.innerHTML+=`<div class='final-total'>66 funciones asignadas</div>`}panel.style.opacity=1;panel.style.transform='translateX(0)'},180)}
+function tick(){focus+=(target-focus)*.045;spin+=active<0?.09:.018;rings.setAttribute('transform',`rotate(${spin+focus})`);shadow.setAttribute('transform',`rotate(${spin+focus})`);requestAnimationFrame(tick)}tick();document.addEventListener('keydown',e=>{
+  if(/[1-5]/.test(e.key)) select(+e.key-1);
+  if(e.key.toLowerCase()==='f'){
+    const enter=!document.body.classList.contains('projection');
+    document.body.classList.toggle('projection',enter);
+    if(enter && !document.fullscreenElement && document.documentElement.requestFullscreen){
+      document.documentElement.requestFullscreen().catch(()=>{});
+    }else if(!enter && document.fullscreenElement && document.exitFullscreen){
+      document.exitFullscreen().catch(()=>{});
+    }
+  }
+});
+setTimeout(()=>select(0),500);
+</script>
+</body>
+</html>

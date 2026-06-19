@@ -1,0 +1,12 @@
+CONSTELACIÓN PLURINORMATIVA DE LA DIRECCIÓN ESCOLAR
+
+Archivo principal: index.html
+
+Para usarla:
+1. Descomprimir el ZIP.
+2. Abrir index.html con Chrome, Edge o Firefox.
+3. Usar F para pantalla completa.
+4. En PowerPoint, Google Slides o Canva, la opción más estable es insertar el enlace online:
+   https://eaguirre25.github.io/CONSTELACION_NORMATIVA/?v=99e2d2
+
+Nota: esta versión descargada necesita conexión a internet porque carga la base estable desde GitHub y la librería visual usada por la constelación. Para la defensa, conviene llevar también el enlace online y una grabación de respaldo por si el proyector o el equipo bloquean contenido web.

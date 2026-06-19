@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title desc">
+  <title id="title">Escuela en estilo vectorial 3D</title>
+  <desc id="desc">Ícono de una escuela celeste con reloj, bandera, ventanas amarillas y entrada arqueada, sobre fondo transparente.</desc>
+
+  <defs>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8DE5F3"/>
+      <stop offset="100%" stop-color="#65CDE2"/>
+    </linearGradient>
+
+    <linearGradient id="wing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7ADBED"/>
+      <stop offset="100%" stop-color="#55BCD3"/>
+    </linearGradient>
+
+    <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4C91AE"/>
+      <stop offset="100%" stop-color="#33708E"/>
+    </linearGradient>
+
+    <linearGradient id="door" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3C6D84"/>
+      <stop offset="100%" stop-color="#234D63"/>
+    </linearGradient>
+
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE99A"/>
+      <stop offset="100%" stop-color="#FFD772"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#1D556F" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#1A5970" flood-opacity="0.18"/>
+    </filter>
+
+    <clipPath id="doorClip">
+      <path d="M210 442V291c0-29 20-51 46-51s46 22 46 51v151z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Base shadow -->
+  <ellipse cx="256" cy="457" rx="205" ry="25" fill="#2B6B83" opacity="0.15"/>
+
+  <g filter="url(#shadow)">
+    <!-- Left wing extrusion -->
+    <polygon points="47,188 160,188 160,425 47,443" fill="#4EB5CC"/>
+    <polygon points="47,188 63,176 176,176 160,188" fill="#95ECF6"/>
+
+    <!-- Right wing extrusion -->
+    <polygon points="352,188 465,188 465,443 352,425" fill="#4EB5CC"/>
+    <polygon points="336,176 449,176 465,188 352,188" fill="#95ECF6"/>
+
+    <!-- Main wings -->
+    <rect x="47" y="188" width="113" height="246" rx="2" fill="url(#wing)"/>
+    <rect x="352" y="188" width="113" height="246" rx="2" fill="url(#wing)"/>
+
+    <!-- Central block -->
+    <polygon points="160,179 256,102 352,179 352,442 160,442" fill="url(#front)"/>
+
+    <!-- Roof depth -->
+    <polygon points="148,183 256,93 364,183 352,196 256,119 160,196" fill="url(#roof)"/>
+    <polygon points="256,93 364,183 352,196 256,119" fill="#2E6B87" opacity="0.38"/>
+
+    <!-- Door -->
+    <path d="M210 442V291c0-29 20-51 46-51s46 22 46 51v151z" fill="url(#door)" stroke="#F8FBF9" stroke-width="7"/>
+    <g clip-path="url(#doorClip)" opacity="0.12">
+      <path d="M222 286L297 361" stroke="#A8CFD7" stroke-width="7"/>
+      <path d="M213 333L291 411" stroke="#A8CFD7" stroke-width="7"/>
+      <path d="M239 250L304 315" stroke="#A8CFD7" stroke-width="7"/>
+    </g>
+
+    <!-- Clock -->
+    <circle cx="256" cy="187" r="43" fill="#FFF8DC" filter="url(#softShadow)"/>
+    <circle cx="256" cy="187" r="35" fill="#FFD978"/>
+    <line x1="256" y1="187" x2="256" y2="161" stroke="#FFF9E8" stroke-width="5" stroke-linecap="round"/>
+    <line x1="256" y1="187" x2="235" y2="187" stroke="#FFF9E8" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="256" cy="187" r="4" fill="#FFF9E8"/>
+
+    <!-- Left windows -->
+    <g fill="url(#glass)" stroke="#FFF9EC" stroke-width="5">
+      <rect x="70" y="224" width="30" height="40" rx="1"/>
+      <rect x="112" y="224" width="30" height="40" rx="1"/>
+      <rect x="70" y="289" width="30" height="40" rx="1"/>
+      <rect x="112" y="289" width="30" height="40" rx="1"/>
+      <rect x="70" y="354" width="30" height="40" rx="1"/>
+      <rect x="112" y="354" width="30" height="40" rx="1"/>
+    </g>
+
+    <!-- Right windows -->
+    <g fill="url(#glass)" stroke="#FFF9EC" stroke-width="5">
+      <rect x="370" y="224" width="30" height="40" rx="1"/>
+      <rect x="412" y="224" width="30" height="40" rx="1"/>
+      <rect x="370" y="289" width="30" height="40" rx="1"/>
+      <rect x="412" y="289" width="30" height="40" rx="1"/>
+      <rect x="370" y="354" width="30" height="40" rx="1"/>
+      <rect x="412" y="354" width="30" height="40" rx="1"/>
+    </g>
+
+    <!-- Small highlights -->
+    <path d="M175 185L256 121L337 185" fill="none" stroke="#B8F5FB" stroke-width="5" opacity="0.55"/>
+    <path d="M61 200V421" stroke="#A7EFF6" stroke-width="4" opacity="0.35"/>
+    <path d="M366 200V421" stroke="#A7EFF6" stroke-width="4" opacity="0.35"/>
+  </g>
+
+  <!-- Flagpole and flag -->
+  <line x1="256" y1="94" x2="256" y2="40" stroke="#4D7F94" stroke-width="6" stroke-linecap="round"/>
+  <path d="M256 43c17-10 33 7 52-1v30c-19 8-35-9-52 1z" fill="#4D91AD"/>
+  <path d="M256 43c17-10 33 7 52-1v7c-19 8-35-9-52 1z" fill="#76BDD1" opacity="0.6"/>
+</svg>

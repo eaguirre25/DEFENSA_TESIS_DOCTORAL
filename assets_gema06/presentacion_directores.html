@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Presentación Directores — versión mejorada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#030611;
+    --bg2:#07111f;
+    --panel:#0b1726;
+    --panel2:#0e2034;
+    --text:#eef7ff;
+    --muted:#8ea8bd;
+    --soft:#4e6478;
+    --cyan:#00e5b4;
+    --cyan2:#7fffe3;
+    --rose:#ff3c6e;
+    --amber:#ffb800;
+    --violet:#8c5cff;
+    --line:rgba(0,229,180,.28);
+    --line2:rgba(255,255,255,.10);
+    --shadow:0 0 42px rgba(0,229,180,.12), inset 0 0 38px rgba(0,229,180,.035);
+    --fh:'Rajdhani', system-ui, sans-serif;
+    --fm:'JetBrains Mono', ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--fh)}
+  body:before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse at 14% 18%, rgba(0,229,180,.18), transparent 42%),
+      radial-gradient(ellipse at 85% 70%, rgba(140,92,255,.12), transparent 48%),
+      radial-gradient(ellipse at 70% 12%, rgba(255,60,110,.08), transparent 38%),
+      linear-gradient(135deg,#030611 0%, #06101e 52%, #030611 100%);
+  }
+  body:after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.55;
+    background:
+      radial-gradient(circle, rgba(0,229,180,.16) 1px, transparent 1.4px) 0 0/38px 38px,
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0/100% 54px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.35));
+  }
+  .deck{position:relative;width:100vw;height:100vh;z-index:2;display:grid;place-items:center;}
+  .slide{
+    position:absolute;width:min(100vw,177.777vh);height:min(56.25vw,100vh);aspect-ratio:16/9;
+    padding:5.4% 6.2%;overflow:hidden;display:none;background:rgba(3,6,17,.48);
+    border:1px solid rgba(0,229,180,.14);box-shadow:var(--shadow);
+  }
+  .slide.active{display:flex;animation:slideIn .45s ease both}
+  @keyframes slideIn{from{opacity:0;transform:translateY(16px) scale(.992)}to{opacity:1;transform:none}}
+  .slide:before{content:"";position:absolute;inset:20px;border:1px solid rgba(0,229,180,.16);pointer-events:none;}
+  .slide:after{content:"";position:absolute;left:-30%;top:0;width:26%;height:2px;background:linear-gradient(90deg,transparent,rgba(127,255,227,.86),transparent);animation:scan 6s linear infinite;filter:drop-shadow(0 0 10px var(--cyan));}
+  @keyframes scan{to{left:120%}}
+  .corner{position:absolute;width:46px;height:46px;border-color:rgba(0,229,180,.62);border-style:solid;z-index:5;}
+  .tl{left:26px;top:26px;border-width:2px 0 0 2px}.tr{right:26px;top:26px;border-width:2px 2px 0 0}.bl{left:26px;bottom:54px;border-width:0 0 2px 2px}.br{right:26px;bottom:54px;border-width:0 2px 2px 0}
+  .hud{position:absolute;left:6.2%;right:6.2%;bottom:2.8%;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(0,229,180,.16);padding-top:10px;font-family:var(--fm);letter-spacing:.16em;font-size:clamp(12px,1.05vw,20px);color:rgba(127,255,227,.43);text-transform:uppercase;}
+  .kicker{font-family:var(--fm);font-size:clamp(13px,1.2vw,24px);letter-spacing:.24em;color:var(--cyan);text-transform:uppercase;text-shadow:0 0 12px rgba(0,229,180,.45);font-weight:700;}
+  h1{font-size:clamp(56px,6.7vw,126px);line-height:.96;font-weight:700;letter-spacing:-.035em;max-width:1300px;text-transform:none;}
+  h2{font-size:clamp(48px,5.2vw,98px);line-height:1;font-weight:700;letter-spacing:-.025em;}
+  h3{font-size:clamp(32px,3.2vw,60px);line-height:1.05;font-weight:700;}
+  p{font-size:clamp(24px,2.3vw,42px);line-height:1.36;color:var(--muted);font-weight:500;}
+  .cyan{color:var(--cyan);text-shadow:0 0 26px rgba(0,229,180,.65)}.rose{color:var(--rose);text-shadow:0 0 26px rgba(255,60,110,.65)}.amber{color:var(--amber);text-shadow:0 0 24px rgba(255,184,0,.55)}.violet{color:var(--violet);text-shadow:0 0 24px rgba(140,92,255,.55)}
+  .rule{width:96px;height:7px;background:linear-gradient(90deg,var(--cyan),rgba(0,229,180,.15));box-shadow:0 0 22px rgba(0,229,180,.75);margin:30px 0 38px;}
+  .title-block{position:relative;z-index:4;display:flex;flex-direction:column;gap:20px;max-width:1500px;}
+  .accent-bars{display:flex;gap:14px;margin-top:30px}.accent-bars span{height:7px;border-radius:99px;display:block}.accent-bars span:nth-child(1){width:110px;background:var(--cyan);box-shadow:0 0 18px var(--cyan)}.accent-bars span:nth-child(2){width:58px;background:var(--rose);box-shadow:0 0 18px var(--rose)}.accent-bars span:nth-child(3){width:32px;background:var(--amber);box-shadow:0 0 18px var(--amber)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:34px;width:100%;align-items:stretch;}
+  .card{position:relative;background:linear-gradient(180deg,rgba(14,32,52,.78),rgba(6,14,25,.82));border:1px solid rgba(0,229,180,.20);box-shadow:0 0 30px rgba(0,0,0,.22), inset 0 0 30px rgba(0,229,180,.03);padding:30px;border-radius:24px;overflow:hidden;}
+  .card:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,180,.12),transparent 36%,rgba(255,255,255,.04));opacity:.55;pointer-events:none}
+  .card.red{border-color:rgba(255,60,110,.30)}.card.red:before{background:linear-gradient(135deg,rgba(255,60,110,.13),transparent 36%,rgba(255,255,255,.035))}.card.amber{border-color:rgba(255,184,0,.32)}.card.violet{border-color:rgba(140,92,255,.32)}
+  .num{font-family:var(--fm);font-size:clamp(15px,1.1vw,22px);letter-spacing:.22em;color:var(--cyan);font-weight:700;text-transform:uppercase}.card.red .num{color:var(--rose)}.card.amber .num{color:var(--amber)}.card.violet .num{color:var(--violet)}
+  .card-title{font-size:clamp(32px,3vw,58px);font-weight:700;margin:14px 0 10px;line-height:1.02}.card small,.sub{font-size:clamp(20px,1.6vw,30px);line-height:1.28;color:var(--muted);font-weight:500}.tag{font-family:var(--fm);font-size:clamp(12px,.9vw,18px);letter-spacing:.18em;color:var(--bg);background:var(--cyan);padding:8px 12px;border-radius:999px;display:inline-flex;margin-top:18px;font-weight:700}.tag.red{background:var(--rose)}.tag.amber{background:var(--amber)}.tag.violet{background:var(--violet);color:#fff}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;width:100%;margin-top:46px}.grid4 .card{min-height:285px;display:flex;flex-direction:column;justify-content:space-between}.letter{font-size:clamp(52px,5vw,94px);font-weight:700;line-height:.8;}
+  .chips{display:flex;flex-wrap:wrap;gap:16px;margin-top:34px}.chip{font-size:clamp(22px,1.8vw,34px);font-weight:600;color:var(--text);border:1px solid rgba(0,229,180,.26);background:rgba(0,229,180,.06);padding:14px 20px;border-radius:18px}.chip:before{content:"◆";color:var(--cyan);margin-right:12px;font-size:.72em}.flow{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:30px}.step{font-family:var(--fm);letter-spacing:.12em;font-size:clamp(16px,1.1vw,22px);color:var(--text);border:1px solid rgba(0,229,180,.25);padding:14px 16px;background:rgba(0,229,180,.055);border-radius:16px}.arrow{font-size:30px;color:var(--cyan)}
+  .compare{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;width:100%;margin-top:40px}.compare .symbol{font-size:clamp(58px,5vw,96px);color:var(--muted);font-weight:700}.bullets{display:flex;flex-direction:column;gap:12px;margin-top:20px}.bullet{font-size:clamp(22px,1.7vw,32px);line-height:1.25;color:var(--text);font-weight:600;padding-left:26px;position:relative}.bullet:before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);border-radius:50%}.card.red .bullet:before{background:var(--rose);box-shadow:0 0 12px var(--rose)}.card.amber .bullet:before{background:var(--amber);box-shadow:0 0 12px var(--amber)}
+  .warning{font-size:clamp(52px,5.4vw,104px);font-weight:700;color:var(--amber);text-shadow:0 0 28px rgba(255,184,0,.6);letter-spacing:-.02em}.quote{font-size:clamp(28px,2.65vw,52px);line-height:1.26;font-weight:600;color:var(--text);max-width:1350px}.note{font-size:clamp(24px,2.0vw,38px);line-height:1.35;color:var(--muted);border-left:6px solid var(--amber);background:rgba(255,184,0,.06);padding:22px 30px;border-radius:0 20px 20px 0;margin-top:34px;max-width:1450px;}
+  .routes{display:grid;grid-template-columns:1fr 1fr;gap:32px;width:100%;margin-top:42px}.routes .card{min-height:410px}.routes .bullet{font-size:clamp(23px,1.75vw,34px)}
+  .cycle{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:20px;align-items:center;width:100%;margin-top:44px}.cycle .card{text-align:center;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center}.cycle .card-title{font-size:clamp(40px,4vw,76px)}.cycle .arrow{font-size:clamp(42px,4.2vw,78px)}
+  .side-index{position:absolute;right:2.5%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:20}.dot{width:8px;height:28px;border-radius:99px;background:rgba(142,168,189,.22);border:1px solid rgba(255,255,255,.08)}.dot.active{background:var(--cyan);box-shadow:0 0 16px var(--cyan);height:44px}.help{position:fixed;left:18px;bottom:14px;z-index:40;font-family:var(--fm);font-size:12px;letter-spacing:.1em;color:rgba(238,247,255,.45);background:rgba(3,6,17,.54);border:1px solid rgba(0,229,180,.16);padding:8px 10px;border-radius:999px;backdrop-filter:blur(10px)}
+  .glow-orb{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,180,.18),transparent 65%);filter:blur(6px);right:-160px;bottom:-170px;opacity:.75}.glow-orb.red{background:radial-gradient(circle,rgba(255,60,110,.16),transparent 65%)}
+
+  /* Aparición progresiva por diapositiva */
+  @keyframes elementReveal{
+    from{opacity:0;transform:translateY(22px) scale(.985);filter:blur(7px)}
+    to{opacity:1;transform:none;filter:blur(0)}
+  }
+  @keyframes elementGlowReveal{
+    0%{opacity:0;transform:translateY(24px) scale(.97);filter:blur(10px);box-shadow:none}
+    65%{opacity:1;filter:blur(0);box-shadow:0 0 30px rgba(0,229,180,.22), inset 0 0 26px rgba(0,229,180,.045)}
+    100%{opacity:1;transform:none;filter:blur(0)}
+  }
+  @keyframes lineGrow{
+    from{opacity:0;transform:scaleX(.08);transform-origin:left center;filter:blur(4px)}
+    to{opacity:1;transform:scaleX(1);filter:blur(0)}
+  }
+  .slide.active .title-block > *,
+  .slide.active > div:not(.hud):not(.glow-orb) > .kicker,
+  .slide.active > div:not(.hud):not(.glow-orb) > h1,
+  .slide.active > div:not(.hud):not(.glow-orb) > h2,
+  .slide.active > div:not(.hud):not(.glow-orb) > .warning,
+  .slide.active > div:not(.hud):not(.glow-orb) > .quote,
+  .slide.active > div:not(.hud):not(.glow-orb) > p{
+    opacity:0;animation:elementReveal .72s cubic-bezier(.16,.84,.22,1) forwards;
+  }
+  .slide.active .rule{opacity:0;animation:lineGrow .72s cubic-bezier(.16,.84,.22,1) forwards;animation-delay:.36s}
+  .slide.active .accent-bars{opacity:0;animation:elementReveal .62s ease forwards;animation-delay:.60s}
+  .slide.active .title-block > :nth-child(1){animation-delay:.10s}
+  .slide.active .title-block > :nth-child(2){animation-delay:.24s}
+  .slide.active .title-block > :nth-child(3){animation-delay:.42s}
+  .slide.active .title-block > :nth-child(4){animation-delay:.58s}
+  .slide.active > div:not(.hud):not(.glow-orb) > .kicker{animation-delay:.08s}
+  .slide.active > div:not(.hud):not(.glow-orb) > h1,
+  .slide.active > div:not(.hud):not(.glow-orb) > h2{animation-delay:.22s}
+  .slide.active > div:not(.hud):not(.glow-orb) > .warning{animation-delay:.10s}
+  .slide.active > div:not(.hud):not(.glow-orb) > .quote{animation-delay:.34s}
+  .slide.active > div:not(.hud):not(.glow-orb) > p{animation-delay:.46s}
+  .slide.active .card,
+  .slide.active .chip,
+  .slide.active .step,
+  .slide.active .compare .symbol,
+  .slide.active .cycle .arrow,
+  .slide.active .flow .arrow,
+  .slide.active .note{
+    opacity:0;animation:elementGlowReveal .68s cubic-bezier(.16,.84,.22,1) forwards;
+  }
+  .slide.active .card:nth-child(1),
+  .slide.active .grid4 .card:nth-child(1),
+  .slide.active .routes .card:nth-child(1),
+  .slide.active .cycle .card:nth-child(1){animation-delay:.38s}
+  .slide.active .card:nth-child(2),
+  .slide.active .grid4 .card:nth-child(2),
+  .slide.active .routes .card:nth-child(2),
+  .slide.active .cycle .card:nth-child(3){animation-delay:.54s}
+  .slide.active .grid4 .card:nth-child(3),
+  .slide.active .cycle .card:nth-child(5){animation-delay:.70s}
+  .slide.active .grid4 .card:nth-child(4){animation-delay:.86s}
+  .slide.active .compare .symbol,
+  .slide.active .cycle .arrow:nth-child(2),
+  .slide.active .flow .arrow:nth-child(2){animation-delay:.48s}
+  .slide.active .cycle .arrow:nth-child(4),
+  .slide.active .flow .arrow:nth-child(4){animation-delay:.70s}
+  .slide.active .flow .arrow:nth-child(6){animation-delay:.92s}
+  .slide.active .flow .arrow:nth-child(8){animation-delay:1.14s}
+  .slide.active .chip:nth-child(1), .slide.active .step:nth-child(1){animation-delay:.38s}
+  .slide.active .chip:nth-child(2), .slide.active .step:nth-child(3){animation-delay:.54s}
+  .slide.active .chip:nth-child(3), .slide.active .step:nth-child(5){animation-delay:.70s}
+  .slide.active .chip:nth-child(4), .slide.active .step:nth-child(7){animation-delay:.86s}
+  .slide.active .chip:nth-child(5), .slide.active .step:nth-child(9){animation-delay:1.02s}
+  .slide.active .note{animation-delay:1.02s}
+  .slide.active .bullets .bullet{
+    opacity:0;animation:elementReveal .52s ease forwards;
+  }
+  .slide.active .bullets .bullet:nth-child(1){animation-delay:.72s}
+  .slide.active .bullets .bullet:nth-child(2){animation-delay:.84s}
+  .slide.active .bullets .bullet:nth-child(3){animation-delay:.96s}
+  .slide.active .bullets .bullet:nth-child(4){animation-delay:1.08s}
+  .slide.active .bullets .bullet:nth-child(5){animation-delay:1.20s}
+  .slide.active .bullets .bullet:nth-child(6){animation-delay:1.32s}
+  @media(max-width:900px){.slide{padding:7% 8%;}.grid4,.two-col,.routes{grid-template-columns:1fr}.compare,.cycle{grid-template-columns:1fr}.arrow,.compare .symbol{display:none}.side-index{display:none}.hud{font-size:10px}.card{padding:20px}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <div class="side-index" id="sideIndex"></div>
+  <div class="help">← / → recorrer · F pantalla completa</div>
+
+  <section class="slide active" data-label="Portada">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb"></div>
+    <div class="title-block">
+      <h1>¿Quién puede ser <span class="cyan">director/a</span><br>y quién no debe seguir <span class="rose">siéndolo?</span></h1>
+      <div class="accent-bars"><span></span><span></span><span></span></div>
+    </div>
+    <div class="hud"><span></span><span>01 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="01 — Mecanismos">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb"></div>
+    <div class="title-block">
+      <div class="kicker">01 · Sección 01</div>
+      <h2>Mecanismos de <span class="cyan">ascenso</span><br>y <span class="cyan">selección</span></h2>
+      <div class="rule"></div>
+      <p>¿Cómo un/a docente asciende como director/a?</p>
+    </div>
+    <div class="hud"><span></span><span>02 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Las 4 vías de acceso">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="width:100%;position:relative;z-index:3">
+      <div class="kicker">Mapa de ingreso a la función</div>
+      <h2>Cuatro vías de acceso al <span class="cyan">cargo directivo</span></h2>
+      <div class="grid4">
+        <div class="card"><div><div class="letter cyan">A</div><div class="card-title">Concurso de titularización</div><small>Reiniciados luego de 15 años de interrupción.</small></div><span class="tag">Estabilidad plena</span></div>
+        <div class="card violet"><div><div class="letter violet">B</div><div class="card-title">Pruebas de selección</div><small>Realizadas anualmente.</small></div><span class="tag violet">Transitoria</span></div>
+        <div class="card amber"><div><div class="letter amber">C</div><div class="card-title">Cobertura puntual</div><small>Por necesidades específicas del sistema.</small></div><span class="tag amber">Transitoria</span></div>
+        <div class="card red"><div><div class="letter rose">D</div><div class="card-title">Asignación directa</div><small>Para garantizar continuidad de la conducción escolar.</small></div><span class="tag red">Transitoria</span></div>
+      </div>
+    </div>
+    <div class="hud"><span></span><span>03 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Requisitos de acceso">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="width:100%;position:relative;z-index:3">
+      <div class="kicker">Requisitos básicos para aspirar</div>
+      <h2>Condiciones de acceso al cargo</h2>
+      <div class="chips">
+        <div class="chip">Docente con título habilitante</div><div class="chip">En servicio activo</div><div class="chip">7 años de antigüedad docente</div><div class="chip">Calificaciones favorables</div>
+      </div>
+      <div class="card" style="margin-top:48px;padding:34px 38px;">
+        <div class="num">Proceso de selección</div>
+        <div class="flow"><span class="step">Asesoramiento</span><span class="arrow">→</span><span class="step">Prueba escrita</span><span class="arrow">→</span><span class="step">Proyecto de gestión</span><span class="arrow">→</span><span class="step">Coloquio</span><span class="arrow">→</span><span class="step">Orden de mérito</span></div>
+      </div>
+    </div>
+    <div class="hud"><span></span><span>04 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="02 — Formación">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb red"></div>
+    <div class="title-block">
+      <div class="kicker">02 · Sección 02</div>
+      <h2><span class="amber">Formación</span><br>directiva</h2>
+      <div class="rule"></div>
+      <p>El sistema exige competencias directivas, pero la formación queda librada a la <span class="amber">autogestión individual</span>.</p>
+    </div>
+    <div class="hud"><span></span><span>05 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Formación autogestión">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="width:100%;position:relative;z-index:3">
+      <div class="kicker">Una formación que nadie garantiza</div>
+      <div class="compare">
+        <div class="card">
+          <div class="num">El sistema exige</div><div class="card-title cyan">Competencias directivas</div>
+          <div class="bullets"><div class="bullet">Conocimiento del sistema</div><div class="bullet">Liderazgo pedagógico</div><div class="bullet">Gestión institucional</div><div class="bullet">Proyecto de gestión propio</div></div>
+        </div>
+        <div class="symbol">≠</div>
+        <div class="card amber">
+          <div class="num">El sistema garantiza</div><div class="card-title amber">Formación virtual</div>
+          <div class="bullets"><div class="bullet">Desde 2025</div><div class="bullet">Obligatoria y asincrónica</div><div class="bullet">Solo para titularización</div><div class="bullet">Alcance limitado</div></div>
+        </div>
+      </div>
+      <div class="note">La preparación depende de la voluntad, posibilidad, recursos y redes profesionales de cada aspirante.</div>
+    </div>
+    <div class="hud"><span></span><span>06 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Lo paradojal">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb red"></div>
+    <div style="position:relative;z-index:3;max-width:1500px">
+      <div class="warning">Lo paradojal</div>
+      <div class="rule" style="background:linear-gradient(90deg,var(--amber),rgba(255,184,0,.12));box-shadow:0 0 22px rgba(255,184,0,.75)"></div>
+      <div class="quote">El sistema evalúa como si existiera una formación directiva sistemática, pero quienes aspiran deben construir esa preparación por sus propios medios.</div>
+      <div class="note">Las evaluaciones parten de episodios abstractos que difieren de la tarea real de la dirección, crítica frecuente de directores/as y aspirantes.</div>
+    </div>
+    <div class="hud"><span></span><span>07 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="03 — Salidas">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb red"></div>
+    <div class="title-block">
+      <div class="kicker">03 · Sección 03</div>
+      <h2>¿Cómo y cuándo se deja de ser <span class="rose">director/a</span>?</h2>
+      <div class="rule" style="background:linear-gradient(90deg,var(--rose),rgba(255,60,110,.12));box-shadow:0 0 22px rgba(255,60,110,.75)"></div>
+      <p>Salidas voluntarias y apartamientos del sistema.</p>
+    </div>
+    <div class="hud"><span></span><span>08 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Tipos de salida">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="width:100%;position:relative;z-index:3">
+      <div class="kicker">Dos formas de dejar el cargo</div>
+      <div class="routes">
+        <div class="card">
+          <div class="num">3.1 — Salidas voluntarias</div>
+          <div class="bullets"><div class="bullet">Renuncia</div><div class="bullet">Jubilación</div><div class="bullet">Traslado por razones personales, familiares o de salud</div><div class="bullet">Regreso a la función docente</div><div class="bullet">Ascenso a supervisión</div></div>
+        </div>
+        <div class="card red">
+          <div class="num">3.2 — Apartamientos</div>
+          <div class="bullets"><div class="bullet">Cese preventivo por sumario</div><div class="bullet">Suspensión</div><div class="bullet">Cesantía</div><div class="bullet">Exoneración</div><div class="bullet">Traslado por necesidad del servicio</div><div class="bullet">Reubicaciones administrativas</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hud"><span></span><span>09 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="El ciclo completo">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="width:100%;position:relative;z-index:3">
+      <div class="kicker">El ciclo de fabricación del sujeto directivo</div>
+      <div class="cycle">
+        <div class="card"><div class="num">01</div><div class="card-title cyan">Llegar</div><small>Mecanismos de acceso</small></div>
+        <div class="arrow">→</div>
+        <div class="card amber"><div class="num">02</div><div class="card-title amber">Sostenerse</div><small>Formación autogestión</small></div>
+        <div class="arrow">→</div>
+        <div class="card red"><div class="num">03</div><div class="card-title rose">Salir</div><small>Voluntario o forzado</small></div>
+      </div>
+      <div class="note">La distinción jurídica voluntario / no voluntario no siempre alcanza. Una renuncia, traslado o regreso pueden estar atravesados por desgaste, conflictos o falta de reconocimiento.</div>
+    </div>
+    <div class="hud"><span></span><span>10 / 11</span></div>
+  </section>
+
+  <section class="slide" data-label="Recambio directiva">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="glow-orb"></div>
+    <div class="title-block">
+      <div class="kicker">Efecto estructural del sistema</div>
+      <h2>Rotación<br><span class="cyan">directiva</span></h2>
+      <div class="rule"></div>
+      <p>El egreso completa el ciclo: <span style="color:var(--text)">llegar, sostenerse, salir o ser apartado/a.</span></p>
+    </div>
+    <div class="hud"><span></span><span>11 / 11</span></div>
+  </section>
+</div>
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const side=document.getElementById('sideIndex');
+  let i=0;
+  slides.forEach((_,idx)=>{const d=document.createElement('div'); d.className='dot'+(idx===0?' active':''); side.appendChild(d);});
+  const dots=[...document.querySelectorAll('.dot')];
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+    dots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  }
+  window.addEventListener('keydown', async (e)=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
+    if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(i-1)}
+    if(e.key.toLowerCase()==='f'){
+      e.preventDefault();
+      if(!document.fullscreenElement){await document.documentElement.requestFullscreen().catch(()=>{});} else {await document.exitFullscreen().catch(()=>{});}
+    }
+    if(e.key>='1' && e.key<='9'){show(Number(e.key)-1)}
+    if(e.key==='0'){show(9)}
+  });
+  dots.forEach((d,idx)=>d.addEventListener('click',()=>show(idx)));
+})();
+</script>
+</body>
+</html>

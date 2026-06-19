@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trayectorias y cronologías</title>
+  <link rel="stylesheet" href="styles.css?v=14" />
+</head>
+<body>
+  <main id="trayectorias-widget" class="trayectorias-widget">
+    <header class="widget-header">
+      <p class="eyebrow">GEMA 04 · CONTEXTO DE INVESTIGACIÓN Y SELECCIÓN DE CASOS</p>
+      <h1>Trayectorias y cronologías de las directoras y el director</h1>
+    </header>
+
+    <section class="timeline-layout">
+      <aside class="axis-panel" aria-label="Escala temporal">
+        <div class="axis-title">AÑO</div>
+        <div class="axis-track">
+          <div class="axis-line"></div>
+          <div class="year-markers" id="year-markers"></div>
+        </div>
+      </aside>
+
+      <section class="schools-grid" id="schools-grid" aria-label="Escuelas"></section>
+    </section>
+
+    <div id="floating-tooltip" class="floating-tooltip" role="dialog" aria-live="polite"></div>
+  </main>
+
+  <script src="script.js?v=12"></script>
+</body>
+</html>

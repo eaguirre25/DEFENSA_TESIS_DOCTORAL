@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LA CONSTELACIÓN PLURINORMATIVA DE LA DIRECCIÓN ESCOLAR</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700;800&display=swap');
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020308;color:#6a9ae8;font-family:Rajdhani,'Segoe UI',Arial,sans-serif}
+#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+</style>
+</head>
+<body>
+<div id="loading">Cargando constelación...</div>
+<script>
+(async function(){
+  const stableUrl='https://raw.githubusercontent.com/eaguirre25/CONSTELACION_NORMATIVA/e6ba0e19765aac3752e4d9798420a02dfa8fe804/index.html';
+  const res=await fetch(stableUrl,{cache:'no-store'});
+  if(!res.ok) throw new Error('No se pudo cargar la versión estable');
+  let html=await res.text();
+
+  html=html.replace(/#center-label\{[\s\S]*?\n\}/, `#center-label{
+  position:fixed;left:33.06%;top:50%;
+  transform:translate(-50%,-50%);
+  z-index:150;pointer-events:none;
+  background:rgba(0,0,0,.55);
+  color:#ffe000;
+  font-size:8.5px;font-weight:900;
+  line-height:.9;
+  letter-spacing:.75px;text-transform:uppercase;
+  padding:2px 6px;border-radius:5px;
+  border:1px solid rgba(255,224,0,.95);
+  white-space:nowrap;
+  box-shadow:0 0 7px rgba(255,224,0,.95),0 0 18px rgba(255,224,0,.55),inset 0 0 7px rgba(255,224,0,.35);
+  text-align:center;
+  text-shadow:0 0 2px rgba(255,255,255,.95),0 0 8px rgba(255,224,0,.95),0 0 14px rgba(255,224,0,.75);
+}
+#center-label span{display:block}`);
+
+  html=html.replace('<div id="center-label">◆ Dirección Escolar ◆</div>', '<div id="center-label"><span>DIRECCIÓN</span><span>ESCOLAR</span></div>');
+
+  html=html.replace(/#head\{[\s\S]*?\n#head h1\{[\s\S]*?\n#head p\{/, `#head{position:fixed;top:12px;left:calc((100vw - 500px)/2);transform:translateX(-50%);
+  text-align:center;pointer-events:none;max-width:1120px;width:calc(100vw - 540px);z-index:100}
+#head h1{font-size:42px;font-weight:800;color:#6a9ae8;letter-spacing:.6px;line-height:.88;text-transform:uppercase;text-shadow:0 0 18px rgba(80,130,255,.25)}
+#head h1 span{display:block}
+#head p{`);
+
+  html=html.replace('<h1>LA CONSTELACIÓN PLURINORMATIVA DE LA DIRECCIÓN ESCOLAR</h1>', '<h1><span>LA CONSTELACIÓN PLURINORMATIVA DE LA</span><span>DIRECCIÓN ESCOLAR</span></h1>');
+  html=html.replace(/#ctrl\{[^}]*\}/, '#ctrl{display:none}');
+  html=html.replace(/<div id="ctrl">[\s\S]*?<\/div>/, '<div id="ctrl"></div>');
+  html=html.replace(/<div id="label-move-box">[\s\S]*?<\/script>\s*/g, '');
+
+  document.open();
+  document.write(html);
+  document.close();
+})().catch(function(err){
+  document.body.innerHTML='<div id="loading">Error al cargar la constelación. Recargá con Ctrl + F5 o abrí la versión online: https://eaguirre25.github.io/CONSTELACION_NORMATIVA/</div>';
+  console.error(err);
+});
+</script>
+</body>
+</html>
