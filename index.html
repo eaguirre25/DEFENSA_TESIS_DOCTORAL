@@ -2967,6 +2967,43 @@ function sendGema06RelatosKey(key){
   try{frame?.contentWindow?.document?.dispatchEvent(new KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));}catch(err){}
 }
 
+const GEMA07_EMBEDS={
+  s7_1:{src:'assets_gema07/afectividades.html',title:'Afectividades'},
+  s7_2:{src:'assets_gema07/espacialidades.html',title:'Espacialidades'},
+  s7_3:{src:'assets_gema07/materialidades.html',title:'Materialidades'}
+};
+
+function openGema07Embed(kind){
+  const embed=GEMA07_EMBEDS[kind];
+  if(!embed)return;
+  if(rqAnimTimer){clearTimeout(rqAnimTimer);rqAnimTimer=null}
+  rqActiveKind=kind;
+  document.getElementById('rq-screen').classList.remove('tecno-fullscreen');
+  document.getElementById('rq-screen').classList.add('narrative-fullscreen');
+  const bgNum=RQ_SECTION_BG[kind]||6;
+  document.getElementById('rq-screen').style.setProperty('--embed-bg',"url('bg_embed_"+bgNum+".png')");
+  playWarp();
+  setRQStandardVisible(false);
+  clearRQStandard();
+  showRQOverlay();
+  const special=document.getElementById('rq-special');
+  special.innerHTML=`
+    <style>
+      .gema07-embed-stage{position:absolute;inset:0;overflow:hidden;background:#040914}
+      .gema07-embed{position:absolute;inset:0;width:100%;height:100%;border:0;background:#040914;animation:gema07EmbedIn .72s cubic-bezier(.17,.82,.22,1) both}
+      @keyframes gema07EmbedIn{from{opacity:0;filter:blur(10px);transform:scale(.94)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+    </style>
+    <section class="gema07-embed-stage">
+      <iframe class="gema07-embed" src="${embed.src}" title="${embed.title}"></iframe>
+    </section>`;
+  special.classList.add('visible');
+}
+
+function sendGema07Key(key){
+  const frame=document.querySelector('.gema07-embed');
+  try{frame?.contentWindow?.document?.dispatchEvent(new KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));}catch(err){}
+}
+
 function advanceGema05Narrativas(dir=1,fromChild=false){
   if(gema05NarrativeStep>=3&&!fromChild){
     const frame=document.querySelector('.narrative-embed');
@@ -3011,6 +3048,7 @@ function openRQSection(kind){
   if(kind==='s6_1'){openGema06Directores();return;}
   if(kind==='s6_2'){openGema06Recambio();return;}
   if(kind==='s6_3'){openGema06RelatosPoliticos();return;}
+  if(kind==='s7_1'||kind==='s7_2'||kind==='s7_3'){openGema07Embed(kind);return;}
   const bgNum=RQ_SECTION_BG[kind]||6;
   document.getElementById('rq-screen').style.setProperty('--embed-bg',"url('bg_embed_"+bgNum+".png')");
   playWarp();
@@ -4482,6 +4520,10 @@ document.addEventListener('keydown',e=>{
   if(rqOpen&&rqActiveKind==='s6_3'){
     if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();sendGema06RelatosKey('ArrowRight');return;}
     if(e.key==='ArrowLeft'){e.preventDefault();sendGema06RelatosKey('ArrowLeft');return;}
+  }
+  if(rqOpen&&(rqActiveKind==='s7_1'||rqActiveKind==='s7_2'||rqActiveKind==='s7_3')){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='Enter'){e.preventDefault();sendGema07Key('ArrowRight');return;}
+    if(e.key==='ArrowLeft'){e.preventDefault();sendGema07Key('ArrowLeft');return;}
   }
   if(rqOpen&&rqActiveKind==='s4_4'){
     if(e.key==='m'||e.key==='M'){e.preventDefault();toggleTecnoImageEdit();return;}
